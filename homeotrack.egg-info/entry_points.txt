@@ -1,0 +1,2 @@
+[console_scripts]
+homeotrack-ingest = homeotrack.database.ingest_oorep:main

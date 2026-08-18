@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeoTrack — AI-First Homeopathic Clinical Decision Support System</title>
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Top Navigation Header -->
+        <header class="app-header">
+            <div class="logo-brand">
+                <div class="logo-icon">🌿</div>
+                <div class="brand-text">
+                    <span class="brand-title">HomeoTrack <span class="badge-tag">CDSS v0.1</span></span>
+                    <span class="brand-subtitle">AI-First Neuro-Symbolic Homeopathic Decision Support</span>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat-pill"><span class="stat-value">143,408</span> Rubrics</div>
+                <div class="stat-pill"><span class="stat-value">2,432</span> Remedies</div>
+                <div class="stat-pill"><span class="stat-value">1.35M</span> Matrix Links</div>
+                <div class="db-badge">PostgreSQL / oorep</div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="main-content">
+            <!-- Left Panel: Patient Intake & Case Totality -->
+            <section class="panel panel-intake">
+                <div class="panel-header">
+                    <h2>Patient Consultation Intake</h2>
+                    <p>Enter patient details and select symptom totality rubrics</p>
+                </div>
+
+                <!-- Patient Profile Fields -->
+                <div class="patient-form">
+                    <div class="form-group">
+                        <label for="patient_name">Patient Name</label>
+                        <input type="text" id="patient_name" placeholder="e.g. Eleanor Vance" value="Sample Consultation Patient">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="patient_age">Age</label>
+                            <input type="number" id="patient_age" placeholder="38" value="38">
+                        </div>
+                        <div class="form-group">
+                            <label for="patient_gender">Gender</label>
+                            <select id="patient_gender">
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="chief_complaint">Chief Complaint</label>
+                        <textarea id="chief_complaint" rows="2" placeholder="e.g. Chronic morning headache with gastric distress and intense irritability...">Chronic morning headache aggravated by mental effort, severe gastric irritability, and stomach burning.</textarea>
+                    </div>
+                </div>
+
+                <!-- Rubric Search & Selection -->
+                <div class="rubric-search-section">
+                    <label for="rubric_search_input">Search Repertory Rubrics (143k Database)</label>
+                    <div class="search-box">
+                        <input type="text" id="rubric_search_input" placeholder="Type symptom e.g. headache, irritability, stomach burning..." autocomplete="off">
+                        <div class="search-spinner" id="search_spinner"></div>
+                    </div>
+                    <div class="search-results-dropdown" id="search_results_dropdown"></div>
+                </div>
+
+                <!-- Case Totality List -->
+                <div class="totality-section">
+                    <div class="section-title-row">
+                        <h3>Symptom Totality List (<span id="symptom_count">0</span>)</h3>
+                        <button class="btn-text-danger" id="clear_symptoms_btn">Clear All</button>
+                    </div>
+                    <div class="symptom-cards-container" id="symptom_cards_container">
+                        <div class="empty-state">
+                            <div class="empty-icon">🔍</div>
+                            <p>No rubrics added yet. Use search above to select rubrics for case analysis.</p>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary-glow" id="btn_run_repertorization">
+                        <span>⚡ Run Case Repertorization</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Panel: Repertorization Analysis & Remedy Heatmap -->
+            <section class="panel panel-analysis">
+                <div class="panel-header flex-between">
+                    <div>
+                        <h2>Repertorization Analysis & Remedy Ranking</h2>
+                        <p>Kent-style weighted symbolic reasoning output grounded in codified knowledge</p>
+                    </div>
+                    <div class="analysis-status" id="analysis_status">Ready</div>
+                </div>
+
+                <!-- Initial Placeholder / Output Grid -->
+                <div id="repertorization_output_container">
+                    <div class="demo-intro-card">
+                        <div class="intro-icon">🧬</div>
+                        <h3>Neuro-Symbolic Repertorization Engine</h3>
+                        <p>Select symptoms from the left panel and click <strong>"Run Case Repertorization"</strong> to view ranked candidate remedies with full transparent rubric degree breakdowns and Materia Medica profiles.</p>
+                        <div class="quick-preset-row">
+                            <span class="preset-label">Quick Benchmark Cases:</span>
+                            <button class="btn-preset" id="preset_nux">Nux Vomica Case</button>
+                            <button class="btn-preset" id="preset_sulph">Sulphur Case</button>
+                            <button class="btn-preset" id="preset_acon">Aconitum Case</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Drawer: Remedy Evidence & Materia Medica Details -->
+    <div class="modal-backdrop" id="remedy_modal_backdrop">
+        <div class="modal-drawer">
+            <button class="modal-close" id="modal_close_btn">&times;</button>
+            <div id="modal_drawer_content">
+                <!-- Dynamic Content Loaded Here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
