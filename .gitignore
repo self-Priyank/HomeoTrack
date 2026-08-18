@@ -1,0 +1,20 @@
+# Database files - too large for GitHub
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
